@@ -1,4 +1,3 @@
-import e from "express";
 import React from "react";
 import { connect } from "react-redux";
 import { useParams, useHistory } from "react-router-dom";
@@ -10,7 +9,10 @@ const Movie = (props) => {
   const movies = [];
   const movie = props.movies.find((movie) => movie.id === Number(id));
 
-  const handleDelete = (e) => {};
+  const handleDelete = (id) => {
+    props.deleteMovie(id);
+    push("/movies");
+  };
 
   return (
     <div className='modal-page col'>
@@ -57,6 +59,7 @@ const Movie = (props) => {
                     type='button'
                     className='m-2 btn btn-danger'
                     value='Delete'
+                    onClick={() => handleDelete(movie.id)}
                   />
                 </span>
               </section>
